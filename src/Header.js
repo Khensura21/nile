@@ -13,7 +13,7 @@ function Header() {
     if (user) {
       auth.signOut();
     }
-  }
+  };
   return (
     <div className="header">
       <Link to="/">
@@ -30,9 +30,11 @@ function Header() {
       </div>
 
       <div className="header__nav">
-      <Link to={!user && "/login"}>
-          <div onClick={handleAuthentication}className="header__option">
-            <span className="header__optionLineOne">What's Up Family!</span>
+        <Link to={!user && "/login"}>
+          <div onClick={handleAuthentication} className="header__option">
+            <span className="header__optionLineOne">
+              What's Up {!user ? "Family" : user.email}!
+            </span>
             <span className="header__optionLineTwo">
               {user ? "Sign Out" : "Sign in"}
             </span>

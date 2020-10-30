@@ -1,3 +1,5 @@
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 import React, { useEffect } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
@@ -6,7 +8,13 @@ import { auth } from "./firebase";
 import Header from "./Header";
 import Home from "./Home";
 import Login from "./Login";
+import Payment from "./Payment";
 import { useStateValue } from "./StateProvider";
+
+//stripe functionality
+const promise = loadStripe(
+  "pk_test_51Hhp7PBleRBoSjYtAHmINp0iAKsvP7XvPUBARMXKUflX8TNVFxie3y0sJ2nGWOVJBjVzNfVtBSELOCADjca38NC800eAmrdl49"
+);
 
 function App() {
   const [{}, dispatch] = useStateValue();
@@ -47,6 +55,12 @@ function App() {
           <Route path="/checkout">
             <Header />
             <Checkout />
+          </Route>
+          <Route path="/payment">
+            <Header />
+            <Elements stripe={promise}>
+              <Payment />
+            </Elements>
           </Route>
           {/* the default root should ALWAYS be at the bottom, or it never gets 'LISTENED' TO /PICKED UP */}
           <Route path="/">
