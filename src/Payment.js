@@ -4,6 +4,7 @@ import CurrencyFormat from "react-currency-format";
 import { Link, useHistory } from "react-router-dom";
 import axios from "./axios";
 import CheckoutProduct from "./CheckoutProduct";
+import { db } from "./firebase";
 import "./Payment.css";
 import { getBasketTotal } from "./reducer";
 import { useStateValue } from "./StateProvider";
@@ -19,7 +20,7 @@ function Payment() {
   const [processing, setProcessing] = useState(false);
   const [error, setError] = useState(null);
   const [disabled, setDisabled] = useState(true);
-  const [clientSecret, setClientSecret] = useState("true");
+  const [clientSecret, setClientSecret] = useState(true);
 
   useEffect(() => {
     // generate the special stripe secret that allows us to charge customers
@@ -48,11 +49,26 @@ function Payment() {
           card: elements.getElement(CardElement),
         },
       })
-      .then(({}) => {
+      .then(({ paymentIntent }) => {
         //paymentIntent = payment confirmation
+
+        db.collection("users")
+          .doc(user?.uid)
+          .collection("orders")
+          .doc(paymentIntent.id)
+          .set({
+            basket: basket,
+            amount: paymentIntent.amount,
+            created: paymentIntent.created
+          });
+
         setSucceeded(true);
         setError(null);
         setProcessing(false);
+
+        dispatch({
+          type: "EMPTY_BASKET",
+        });
 
         history.replace("/orders");
       });
