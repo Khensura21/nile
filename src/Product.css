@@ -18,11 +18,13 @@
     object-fit: contain;
     margin-bottom: 15px;
 }
+
 .product__rating {
     display: flex;
 }
+
 .product>button {
-    background-color: #f0c14b;
+    background-color:rgb(176, 134, 34, 0.8);
     border: 1px solid;
     margin-top: 10px;
     border-color: #A88734 #9c7e31 #846a29;

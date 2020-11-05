@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { auth } from "./firebase";
 import "./Header.css";
 import { useStateValue } from "./StateProvider";
+import nile from "./nile.png";
 
 function Header() {
   const [{ basket, user }, dispatch] = useStateValue();
@@ -17,11 +18,7 @@ function Header() {
   return (
     <div className="header">
       <Link to="/">
-        <img
-          className="header__logo"
-          src="http://pngimg.com/uploads/amazon/amazon_PNG11.png"
-          alt="amazon logo"
-        />
+        <img className="header__logo" src={nile} alt="header_logo" />
       </Link>
 
       <div className="header__search">
@@ -43,12 +40,12 @@ function Header() {
         <Link to="/orders">
           <div className="header__option">
             <span className="header__optionLineOne">Returns</span>
-            <span className="header__optionLineTwo">Orders</span>
+            <span className="header__optionLineTwo"> &amp; Orders</span>
           </div>
         </Link>
         <div className="header__option">
           <span className="header__optionLineOne">Your</span>
-          <span className="header__optionLineTwo">Prime</span>
+          <span className="header__optionLineTwo">Apex</span>
         </div>
 
         <Link to="/checkout">

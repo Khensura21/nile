@@ -2,7 +2,7 @@
     height: 60px;
     display: flex;
     align-items: center;
-    background-color: #131921;
+    background-color: #000000;
     position: sticky;
     top: 0;
     z-index: 100;
@@ -32,7 +32,7 @@
 .header__searchIcon {
     padding: 5px;
     height: 22px !important;
-    background-color: #cd9042;
+    background-color: #D24848;
 }
 
 .header__optionLineOne {
@@ -52,7 +52,7 @@
 
 .header__basketCount {
     margin-left: 10px;
-    margin-right: 10px; 
+    margin-right: 10px;
 }
 
 .header__nav {
